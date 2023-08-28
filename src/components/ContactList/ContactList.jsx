@@ -6,17 +6,15 @@ import notifyOptions from 'NotifyOptions/NotifyOptions';
 import 'react-toastify/dist/ReactToastify.css';
 import { RiDeleteBinLine } from 'react-icons/ri';
 
-import { getContacts } from 'redux/selectors';
-import { getFilter } from 'redux/selectors';
-import { deleteContact } from 'redux/contacts/contactsSlice';
+import { selectFilter, selectContacts } from 'redux/selectors';
+import { deleteContact } from 'redux/contacts/operations';
 
 import css from './ContactList.module.css';
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
-
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
   const onDeleteContact = id => {
     dispatch(deleteContact(id));

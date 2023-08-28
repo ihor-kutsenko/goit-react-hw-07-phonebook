@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { BsSearch } from 'react-icons/bs';
-import { getFilter } from 'redux/selectors';
+
+import { selectFilter } from 'redux/selectors';
 import { filterContact } from 'redux/filter/filterSlice';
+
 import css from './Filter.module.css';
 
 const Filter = () => {
-  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
 
   const searchFilter = e => {
     dispatch(filterContact(e.currentTarget.value.toLowerCase()));
@@ -20,6 +22,7 @@ const Filter = () => {
       <input
         className={css.input}
         type="text"
+        name="filter"
         value={filter}
         onChange={searchFilter}
         placeholder="search"

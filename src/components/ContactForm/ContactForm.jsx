@@ -1,15 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-// import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
 import notifyOptions from 'NotifyOptions/NotifyOptions';
 import 'react-toastify/dist/ReactToastify.css';
 import { BsFillTelephoneFill, BsPersonFill } from 'react-icons/bs';
 import { IoMdPersonAdd } from 'react-icons/io';
 
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contacts/contactsSlice';
+import { addContact } from 'redux/contacts/operations';
+import { selectContacts } from 'redux/selectors';
 
 import css from './ContactForm.module.css';
 
@@ -33,8 +32,8 @@ const schema = yup.object().shape({
 });
 
 const ContactForm = () => {
-  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
   const onAddContact = newContact => {
     const includesContact = contacts.filter(
